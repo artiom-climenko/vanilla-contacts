@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-white);
+    font-family: 'Inter', sans-serif;
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+}
+
+a:hover, button:hover {
+    opacity: 0.8;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+.clip {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+:root {
+    --color-white: #ffffff;
+}
