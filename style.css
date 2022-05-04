@@ -38,3 +38,52 @@ a, button {
 :root {
     --color-white: #ffffff;
 }
+
+.main {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.contactWrapper {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr auto auto;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 10px;
+}
+
+.contactMainInformation {
+    display: grid;
+    grid-row-gap: 5px;
+}
+
+.contactName {
+    font-weight: 700;
+    font-size: 18px;
+    -webkit-line-clamp: 2;
+}
+
+.contactCompany {
+    font-style: italic;
+    font-size: 14px;
+    -webkit-line-clamp: 2;
+}
+
+.contactAge {
+    justify-self: center;
+}
+
+.contactGender {
+    justify-self: center;
+}
+
+.contactChange {
+    background-color: var(--color-white);
+    border: none;
+}
+
+.contactDelete {
+    background-color: var(--color-white);
+    border: none;
+}
