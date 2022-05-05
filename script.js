@@ -9,7 +9,7 @@ let contacts = [
   {id: 8, name: 'Teri Armstrong', company: 'Facebook', age: 54, gender: 'Women'},
   {id: 9, name: 'Benjamin Fadel', company: 'Google', age: 18, gender: 'Man'},
   {id: 10, name: 'Harvey Adams', company: 'Amazon', age: 24, gender: 'Man'}
-]
+];
 
 let main = document.querySelector('.main');
 
@@ -28,11 +28,31 @@ function renderContact(contact) {
             <button class="contactDelete">
               <img src="images/delete-icon.svg" alt="Delete" width="20">
             </button>
-          </div>`
+          </div>`;
 }
 
 function renderContacts(contacts) {
   return contacts.map(contact => renderContact(contact));
 }
 
-main.innerHTML = renderContacts(contacts).join('');
+function displayContacts() {
+  main.innerHTML = renderContacts(contacts).join('');
+}
+
+displayContacts();
+
+function createContact(event) {
+  event.preventDefault();
+
+  let newContact = {
+    id: + new Date(),
+    name: event.target.elements.contactName.value,
+    company: event.target.elements.contactCompany.value,
+    age: event.target.elements.contactAge.value,
+    gender: event.target.elements.contactGender.value
+  };
+  contacts.push(newContact);
+  displayContacts();
+
+  document.getElementById('addContact').reset();
+}

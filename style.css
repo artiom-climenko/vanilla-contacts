@@ -39,6 +39,15 @@ a, button {
     --color-white: #ffffff;
 }
 
+.container {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.modalWindow {
+    margin-top: 15px;
+}
+
 .main {
     max-width: 768px;
     margin: 0 auto;
@@ -75,7 +84,7 @@ a, button {
 }
 
 .contactGender {
-    justify-self: center;
+    justify-self: left;
 }
 
 .contactChange {
