@@ -30,7 +30,12 @@ function renderContact(contact) {
             >
               <img src="images/change-icon.svg" alt="Change" width="20">
             </button>
-            <button class="contactDelete">
+            <button 
+              class="contactDelete btn" 
+              data-bs-toggle="modal" 
+              data-bs-target="#deleteContactModal"
+              onclick="callConfirmDeleteModal(${contact.id})"
+            >
               <img src="images/delete-icon.svg" alt="Delete" width="20">
             </button>
           </div>`;
@@ -83,5 +88,17 @@ function editContact(event) {
   };
 
   contacts = contacts.map(element => element.id === modifiedContact.id ? modifiedContact : element);
+  displayContacts();
+}
+
+function callConfirmDeleteModal(contactId) {
+  let contact = contacts.find(item => item.id === contactId);
+  document.getElementById('deleteContactId').value = contact.id;
+}
+
+function deleteContact(event) {
+  event.preventDefault();
+  let deleteContactId = +document.getElementById('deleteContactId').value;
+  contacts = contacts.filter(element => element.id !== deleteContactId);
   displayContacts();
 }

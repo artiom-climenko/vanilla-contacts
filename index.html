@@ -93,6 +93,25 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="deleteContactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm action</h5>
+        </div>
+        <div class="modal-body">
+          <p>Delete contact?</p>
+          <div class="modal-footer">
+            <form id="deleteContact" onsubmit="deleteContact(event)">
+              <input type="hidden" id="deleteContactId">
+              <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <main class="main"></main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
   <script src="script.js"></script>
