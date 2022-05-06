@@ -1,12 +1,12 @@
 let contacts = [
-  {id: 1, name: 'Becky Zulau', company: 'Google', age: 36, gender: 'Women'},
-  {id: 2, name: 'Lynette Barton', company: 'Facebook', age: 21, gender: 'Women'},
-  {id: 3, name: 'Renee Mayer', company: 'Google', age: 29, gender: 'Women'},
-  {id: 4, name: 'Edwin Grimes', company: 'Amazon', age: 21, gender: 'Men'},
-  {id: 5, name: 'Janie Graham', company: 'Amazon', age: 23, gender: 'Women'},
-  {id: 6, name: 'Julia Haag', company: 'Google', age: 46, gender: 'Women'},
-  {id: 7, name: 'Gertrude Mertz', company: 'Facebook', age: 24, gender: 'Women'},
-  {id: 8, name: 'Teri Armstrong', company: 'Facebook', age: 54, gender: 'Women'},
+  {id: 1, name: 'Becky Zulau', company: 'Google', age: 36, gender: 'Woman'},
+  {id: 2, name: 'Lynette Barton', company: 'Facebook', age: 21, gender: 'Woman'},
+  {id: 3, name: 'Renee Mayer', company: 'Google', age: 29, gender: 'Woman'},
+  {id: 4, name: 'Edwin Grimes', company: 'Amazon', age: 21, gender: 'Man'},
+  {id: 5, name: 'Janie Graham', company: 'Amazon', age: 23, gender: 'Woman'},
+  {id: 6, name: 'Julia Haag', company: 'Google', age: 46, gender: 'Woman'},
+  {id: 7, name: 'Gertrude Mertz', company: 'Facebook', age: 24, gender: 'Woman'},
+  {id: 8, name: 'Teri Armstrong', company: 'Facebook', age: 54, gender: 'Woman'},
   {id: 9, name: 'Benjamin Fadel', company: 'Google', age: 18, gender: 'Man'},
   {id: 10, name: 'Harvey Adams', company: 'Amazon', age: 24, gender: 'Man'}
 ];
@@ -22,7 +22,12 @@ function renderContact(contact) {
             </div>
             <div class="contactAge clip">Age: ${contact.age}</div>
             <div class="contactGender clip">Gender: ${contact.gender}</div>
-            <button class="contactChange">
+            <button 
+              class="contactChange btn" 
+              data-bs-toggle="modal" 
+              data-bs-target="#editContactModal" 
+              onclick="callEditContactModal(${contact.id})"
+            >
               <img src="images/change-icon.svg" alt="Change" width="20">
             </button>
             <button class="contactDelete">
@@ -55,4 +60,28 @@ function createContact(event) {
   displayContacts();
 
   document.getElementById('addContact').reset();
+}
+
+function callEditContactModal(contactId) {
+  let contact = contacts.find(item => item.id === contactId);
+  document.getElementById('editContactId').value = contact.id;
+  document.getElementById('editContactName').value = contact.name;
+  document.getElementById('editContactCompany').value = contact.company;
+  document.getElementById('editContactAge').value = contact.age;
+  document.getElementById('editContactGender').value = contact.gender;
+}
+
+function editContact(event) {
+  event.preventDefault();
+
+  let modifiedContact = {
+    id: +event.target.elements.editContactId.value,
+    name: event.target.elements.editContactName.value,
+    company: event.target.elements.editContactCompany.value,
+    age: +event.target.elements.editContactAge.value,
+    gender: event.target.elements.editContactGender.value
+  };
+
+  contacts = contacts.map(element => element.id === modifiedContact.id ? modifiedContact : element);
+  displayContacts();
 }
