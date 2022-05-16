@@ -11,6 +11,33 @@ let contacts = [
   {id: 10, name: 'Harvey Adams', company: 'Amazon', age: 24, gender: 'Man'}
 ];
 
+function saveFirstContactsToLocalStorage(contacts) {
+  let parseContacts = JSON.parse(localStorage.getItem('contacts'))
+  let stringifyContacts = JSON.stringify(contacts);
+
+  if(parseContacts === null) {
+    localStorage.setItem('contacts', stringifyContacts)
+  }
+}
+
+saveFirstContactsToLocalStorage(contacts);
+
+let allContacts = getAllContactsFromLocalStorage();
+
+function getAllContactsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('contacts'));
+}
+
+function saveAllContactsToLocalStorage(contacts) {
+  let stringifyContacts = JSON.stringify(contacts);
+  localStorage.setItem('contacts', stringifyContacts);
+}
+
+function saveContacts(contacts) {
+  allContacts = contacts;
+  saveAllContactsToLocalStorage(contacts);
+}
+
 let main = document.querySelector('.main');
 
 function renderContact(contact) {
@@ -46,7 +73,7 @@ function renderContacts(contacts) {
 }
 
 function displayContacts() {
-  main.innerHTML = renderContacts(contacts).join('');
+  main.innerHTML = renderContacts(allContacts).join('');
 }
 
 displayContacts();
@@ -61,14 +88,15 @@ function createContact(event) {
     age: event.target.elements.contactAge.value,
     gender: event.target.elements.contactGender.value
   };
-  contacts.push(newContact);
+
+  saveContacts([...allContacts, newContact]);
   displayContacts();
 
   document.getElementById('addContact').reset();
 }
 
 function callEditContactModal(contactId) {
-  let contact = contacts.find(item => item.id === contactId);
+  let contact = allContacts.find(item => item.id === contactId);
   document.getElementById('editContactId').value = contact.id;
   document.getElementById('editContactName').value = contact.name;
   document.getElementById('editContactCompany').value = contact.company;
@@ -87,18 +115,20 @@ function editContact(event) {
     gender: event.target.elements.editContactGender.value
   };
 
-  contacts = contacts.map(element => element.id === modifiedContact.id ? modifiedContact : element);
+  let newContacts = allContacts.map(element => element.id === modifiedContact.id ? modifiedContact : element);
+  saveContacts(newContacts);
   displayContacts();
 }
 
 function callConfirmDeleteModal(contactId) {
-  let contact = contacts.find(item => item.id === contactId);
+  let contact = allContacts.find(item => item.id === contactId);
   document.getElementById('deleteContactId').value = contact.id;
 }
 
 function deleteContact(event) {
   event.preventDefault();
   let deleteContactId = +document.getElementById('deleteContactId').value;
-  contacts = contacts.filter(element => element.id !== deleteContactId);
+  let newContacts = allContacts.filter(element => element.id !== deleteContactId);
+  saveContacts(newContacts);
   displayContacts();
 }
